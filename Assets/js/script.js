@@ -10,35 +10,32 @@ $(document).ready(function () {
     setTimeout(function () {
       $(".notification").removeClass("show");
     }, 2000);
-});
-
-function hourUpdater() {
-  var currentHour = dayjs().hour();
-
-  $(".time-block").each(function () {
-    var blockHour = parseInt($(this).attr("id").split("-")[1]);
-
-    if (blockHour < currentHour) {
-      $(this).addClass("past");
-    } else if (blockHour === currentHour) {
-      $(this).removeClass("past");
-      $(this).addClass("present")
-    } else {
-      $(this).removeClass("past");
-      $(this).removeClass("present");
-      $(this).addClass("future");
-    }
   });
-}
 
+  function hourUpdater() {
+    var currentHour = dayjs().hour();
 
+    $(".time-block").each(function () {
+      var blockHour = parseInt($(this).attr("id").split("-")[1]);
 
-  
- 
-  var currentDate = dayjs();
-  $("#currentDay").text(currentDate.format("dddd,MMMM D"));
+      if (blockHour < currentHour) {
+        $(this).addClass("past");
+      } else if (blockHour === currentHour) {
+        $(this).removeClass("past");
+        $(this).addClass("present");
+      } else {
+        $(this).removeClass("past");
+        $(this).removeClass("present");
+        $(this).addClass("future");
+      }
+    });
+  }
 
-  var startDay = dayjs().hour(9).hour();
-  var endDay = dayjs().hour(17).hour();
+  hourUpdater();
+  setInterval(hourUpdater, 15000);
+  for (var i = 8; i < 18; i++) {
+    $("#hour-" + i + " textarea").val(localStorage.getItem("hour-" + i));
+  }
 
-
+  $("#currentDay").text(dayjs().format("dddd, MMMM D, YYYY"));
+});
