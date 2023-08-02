@@ -4,8 +4,7 @@ body {
   }
   
   header {
-    display: grid;
-    justify-items: center;
+    text-align: center;
   }
   
   textarea {
@@ -61,4 +60,13 @@ body {
   .saveBtn i:hover {
     font-size: 20px;
     transition: all 0.3s ease-in-out;
+  }
+
+  .notification {
+    display: none;
+    padding-bottom: 10px;
+  }
+
+  .show {
+    display: block;
   }
